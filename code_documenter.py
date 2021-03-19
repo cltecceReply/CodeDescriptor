@@ -33,7 +33,7 @@ if __name__ == '__main__':
         engine="davinci-instruct-beta",
         prompt=prompt,
         temperature=0.6,
-        max_tokens=100,
+        max_tokens=300,
         top_p=1,
         best_of=3,
         frequency_penalty=0.2,
@@ -41,3 +41,8 @@ if __name__ == '__main__':
     )
 
     print(response.choices)
+    with open(input_path.replace(".java", "_out.java"), 'w') as f:
+        f.write('""" ')
+        f.write(response.choices[0].text.replace('"', ""))
+        f.write('"""\n')
+        f.writelines(java_func)
